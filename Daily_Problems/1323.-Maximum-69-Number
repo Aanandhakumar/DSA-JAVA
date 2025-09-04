@@ -1,0 +1,30 @@
+1323.-Maximum-69-Number in java...
+
+class Solution {
+    public int maximum69Number (int num) {
+        StringBuilder sb = new StringBuilder();
+        boolean changed = false;
+        String s = String.valueOf(num);
+        for(char c: s.toCharArray()){
+              if( !changed && c=='6'){
+                sb.append('9');
+                changed = true;
+              }else{
+                sb.append(c);
+              }
+        }
+        int ans = Integer.parseInt(sb.toString());
+        return ans;
+    }
+}
+
+class Solution {
+    public int maximum69Number (int num) {
+        String str = String.valueOf(num);
+        str = str.replaceFirst("6","9");
+        num = Integer.parseInt(str);
+        return num;
+        
+    
+    }
+}

@@ -1,0 +1,44 @@
+//670. Maximum Swap in java....
+
+
+
+
+class Solution {
+    public int swap(String s, int l, int r){
+        char[] arr = s.toCharArray();
+        char temp = arr[l];
+        arr[l] = arr[r];
+        arr[r] = temp;
+
+        String s1 = new String(arr);
+        return Integer.parseInt(s1);
+        
+    }
+    public int maximumSwap(int num) {
+       
+       int ans = 0;
+        String s = String.valueOf(num);
+        int n = s.length();
+        if(n == 1) return num;
+
+        int maxval_ind  = n -1;
+        int swap_left = -1;
+        int swap_right = n-1;
+
+        for(int i = n -2; i>=0; i--){
+            if(s.charAt(maxval_ind)<s.charAt(i)){
+                maxval_ind = i;
+            }else if(s.charAt(maxval_ind)>s.charAt(i)){
+                swap_left =i;
+                swap_right = maxval_ind;
+            }
+        }
+
+        if(swap_left != -1){
+          ans =  swap(s,swap_left, swap_right);
+         return ans;
+        }
+
+        return num;
+    }
+}

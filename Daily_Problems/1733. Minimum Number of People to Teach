@@ -1,0 +1,46 @@
+//1733. Minimum Number of People to Teach in java...
+
+class Solution {
+    public int minimumTeachings(int n, int[][] languages, int[][] friendships) {
+        Set<Integer> problemUsers = new HashSet<>();
+        for(int[] friend : friendships){
+            int u = friend[0]-1;
+            int v = friend[1]-1;
+
+            Set<Integer> ulanguages = new HashSet<>();
+            for(int lang : languages[u]){
+                ulanguages.add(lang);
+            }
+
+            boolean communicate = false;
+            for(int lang : languages[v]){
+                if(ulanguages.contains(lang)){
+                    communicate = true;
+                    break;
+                }
+                
+            }
+
+            if(!communicate){
+                problemUsers.add(u);
+                problemUsers.add(v);
+            }
+
+        }
+
+        int[] langs = new int[n+1];
+        int maxlangKnow = 0;
+        
+
+        for(int user : problemUsers){
+            for(int lang : languages[user]){
+                  langs[lang]++;
+               maxlangKnow = Math.max(maxlangKnow,langs[lang]);
+            }
+        }
+        return problemUsers.size()-maxlangKnow;
+    }
+}
+
+//Time complexity : O(F∗L+P∗L);
+//Space complexity : O(m+n);

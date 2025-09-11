@@ -1,0 +1,33 @@
+//2785. Sort Vowels in a String in java....
+
+
+class Solution {
+    public String sortVowels(String s) {
+        Set<Character> vowels = new HashSet<>(Arrays.asList('a','e','i','o','u','A','E','O','I','U'));
+
+        List<Character> vowelList = new ArrayList<>();
+        for(char c : s.toCharArray()){
+            if(vowels.contains(c)){
+                vowelList.add(c);
+            }
+        }
+
+        Collections.sort(vowelList);
+
+        StringBuilder sb = new StringBuilder();
+        int ind = 0;
+        for(char c : s.toCharArray()){
+            if(vowels.contains(c)){
+                sb.append(vowelList.get(ind++));
+            }else{
+                 sb.append(c);
+            }
+        }
+
+        return sb.toString();
+    }
+}
+
+
+//time complexity :O(NlogN);
+//Space complexity : O(1);

@@ -1,0 +1,25 @@
+//1935. Maximum Number of Words You Can Type in java...
+
+class Solution {
+    public int canBeTypedWords(String text, String brokenLetters) {
+        Set<Character> letters = new HashSet<>();
+
+        for (char c : brokenLetters.toCharArray()) {
+            letters.add(c);
+        }
+
+        String[] world = text.split(" ");
+
+        int n = world.length;
+        for (String s : world) {
+            for (char ch : s.toCharArray()) {
+                if (letters.contains(ch)) {
+                    n--;
+                    break;
+                }
+            }
+        }
+        return n;
+
+    }
+}

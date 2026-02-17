@@ -1,0 +1,18 @@
+//401. Binary Watch in java..
+
+class Solution {
+    public List<String> readBinaryWatch(int turnedOn) {
+        List<String> result = new ArrayList<>();
+
+        for(int hour = 0; hour<12; hour++){
+            for(int min = 0; min <60; min++){
+                int totalbits = Integer.bitCount(hour) + Integer.bitCount(min);
+                if(totalbits == turnedOn){
+                    result.add(hour + ":" + String.format("%02d",min));
+                }
+            }
+  
+        }
+        return result;
+    }
+}

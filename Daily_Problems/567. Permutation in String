@@ -1,0 +1,42 @@
+//567. Permutation in String in java..
+
+
+
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        
+        int[] s1hash = new int[26];
+        int[] s2hash = new int[26];
+
+        int s1len = s1.length();
+        int s2len = s2.length();
+
+        if(s1len>s2len){
+            return false;
+        }
+
+        for(int i = 0; i<s1len; i++){
+            s1hash[s1.charAt(i) - 'a']++;
+            s2hash[s2.charAt(i) - 'a']++;
+
+        }
+
+        int left = 0;
+        int right = s1len -1;
+
+        while(right<s2len){
+             if(Arrays.equals(s1hash,s2hash)){
+               return true;
+            }
+            
+
+            right++;
+            if(right != s2len){
+                s2hash[s2.charAt(right) - 'a']++;
+                s2hash[s2.charAt(left) - 'a']--;
+                left++;
+            }
+        }
+        return false;
+    }
+}

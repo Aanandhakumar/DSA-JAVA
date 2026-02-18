@@ -1,0 +1,36 @@
+//643. Maximum Average Subarray I in java....
+
+
+
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+
+        double ans = 0;
+        int left = 0;
+        double currAvg = 0;
+
+        //Initialize very small number
+        double maxAvg = Double.NEGATIVE_INFINITY;
+
+        for(int right = 0; right<nums.length; right++){
+
+            currAvg += nums[right];
+
+
+            if(right-left+1 == k){
+                 ans = currAvg/k;
+
+                maxAvg = Math.max(ans,maxAvg);
+
+                currAvg -= nums[left];
+                left++;
+
+
+            }
+
+            
+        }
+
+        return maxAvg;
+    }
+}

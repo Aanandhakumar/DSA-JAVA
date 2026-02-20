@@ -1,0 +1,33 @@
+//986. Interval List Intersections in java..
+
+class Solution {
+    public int[][] intervalIntersection(int[][] firstList, int[][] secondList) {
+        int n1 = firstList.length;
+        int n2 = secondList.length;
+
+        List<int[]> arr = new ArrayList<>();
+
+        int p1 = 0, p2 = 0;
+
+        while (p1 < n1 && p2 < n2) {
+
+            int start = Math.max(firstList[p1][0], secondList[p2][0]);
+            int end = Math.min(firstList[p1][1], secondList[p2][1]);
+
+
+           // validate correct intersection , elimate condition for overlap
+            if (start <= end) {
+                arr.add(new int[]{start, end});
+            }
+
+            // Move pointer of interval that ends first
+            if (firstList[p1][1] < secondList[p2][1]) {
+                p1++;
+            } else {
+                p2++;
+            }
+        }
+
+        return arr.toArray(new int[arr.size()][]);
+    }
+}

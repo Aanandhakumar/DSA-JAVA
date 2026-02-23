@@ -1,0 +1,26 @@
+//1461. Check If a String Contains All Binary Codes of Size K in java..
+
+
+
+
+class Solution {
+    public boolean hasAllCodes(String s, int k) {
+        int n = s.length();
+
+        int visited = 1<<k;
+
+        Set<String> seenString = new HashSet<>();
+        for(int end = k; end <= n ; end++){
+            String current = s.substring(end - k ,end);
+            if(seenString.add(current)){
+                visited--;
+            }
+
+            if(visited == 0){
+                return true;
+            }
+        }
+        return false;
+        
+    }
+}

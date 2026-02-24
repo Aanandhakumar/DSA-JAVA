@@ -7,13 +7,14 @@ class Solution {
 
         int n = matrix.length;
         int m = matrix[0].length;
+        if(m == 0) return false;
 
         int left = 0;
         int right = n*m - 1;
 
         while(left <= right){
             int mid = (left+right)/2;
-            int curr = matrix[mid/n][mid%n];
+            int curr = matrix[mid/m][mid%m];
             if(curr == target){
                 return true;
             }else if(curr > target){

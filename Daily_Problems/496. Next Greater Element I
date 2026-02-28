@@ -1,0 +1,54 @@
+//496. Next Greater Element I in java...
+
+
+
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int[] nextGE = new int[nums2.length];
+        int[] ans = new int[nums1.length];
+        Map<Integer,Integer> mp = new HashMap<>();
+        Stack<Integer> st = new Stack<>();
+        for(int i = nums2.length-1; i>= 0; i--){
+            int element = nums2[i];
+
+
+            //if stack is empty, put greater element -1
+            if(st.isEmpty()){
+                nextGE[i] = -1;
+                st.push(element);
+                continue;
+
+            }
+
+            //if st top is greater then the element in array
+            if(st.peek() > element){               
+                nextGE[i] = st.peek();
+                st.push(element);
+                continue;                
+            }
+
+
+            //element is greater than the top
+
+            while( !st.isEmpty() && st.peek() <= element){
+                st.pop();
+            }
+            if(st.isEmpty()){
+                nextGE[i] = -1;
+            }else{
+                nextGE[i] = st.peek();
+            }
+            st.push(element);
+        }
+        for(int j = 0; j<nums2.length; j++){
+            mp.put(nums2[j],nextGE[j]);
+        }
+        
+        for(int k = 0; k<nums1.length; k++){
+         ans[k] = mp.get(nums1[k]);
+        }
+        return ans;
+        
+
+    }
+}

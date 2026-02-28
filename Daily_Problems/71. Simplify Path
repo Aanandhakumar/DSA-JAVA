@@ -1,0 +1,33 @@
+//71. Simplify Path in java...
+
+
+class Solution {
+    public String simplifyPath(String path) {
+        Stack<String> st = new Stack<>();
+        String[] components = path.split("/");
+        for(String s : components){
+            if(s.equals("") || s.equals(".")){
+                continue;
+            }
+
+            if(s.equals("..")){
+                if(!st.isEmpty()){
+                    st.pop();
+                }
+            }else{
+                st.push(s);
+            }
+
+
+        }
+        if(st.isEmpty()){
+            return "/";
+        }
+        // foreach method iterates elements in stack insertion method...
+        StringBuilder sb = new StringBuilder();
+        for(String str : st){
+            sb.append("/").append(str);
+        }
+        return sb.toString();
+    }
+}

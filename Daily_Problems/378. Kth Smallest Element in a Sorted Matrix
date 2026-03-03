@@ -1,0 +1,33 @@
+//378. Kth Smallest Element in a Sorted Matrix in java...
+
+
+class Solution {
+    public int kthSmallest(int[][] matrix, int k) {
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        
+
+        //Approach 1.....
+        // for(int[] arr : matrix){
+        //     for(int n : arr){
+        //         pq.add(n);
+
+        //         if(pq.size() > k){
+        //             pq.poll();
+        //         }
+        //     }
+        // }
+
+
+        //Approach 2 better than 1 remove unwanted inserts...
+        for (int[] row : matrix) {
+            for (int num : row) {
+              if (pq.size() == k && num > pq.peek()) break;
+              pq.add(num);
+              if (pq.size() > k) pq.poll();
+    }
+  }
+        return pq.peek();
+        
+    }
+}

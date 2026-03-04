@@ -1,0 +1,68 @@
+//1582. Special Positions in a Binary Matrix in java..
+
+class Solution {
+    public int numSpecial(int[][] mat) {
+
+
+        // //Approach 2 :  TC is 2(n*m) so O(n*m)....
+        // int  n = mat.length;
+        // int m = mat[0].length;
+        // int ans  = 0;
+     
+        // int[] rowCnt = new int[n];
+        // int[] colmCnt = new int[m];
+        // for(int i = 0; i<n; i++){
+        //     for(int j = 0; j<m ; j++){
+        //         if(mat[i][j]== 1){
+        //             rowCnt[i]++;
+        //             colmCnt[j]++;
+        //         }
+        //     }
+        // }
+
+        // for(int i = 0; i<n; i++){
+        //     for(int j = 0; j<m ; j++){
+        //         if(mat[i][j]== 1 && rowCnt[i]==1 && colmCnt[j]==1){
+        //             ans++;
+                   
+        //         }
+        //     }
+        // }
+        // return ans ;
+
+
+
+        //Approach 1 :  Brute force TC is O(n*m*(n+m))....
+        int n = mat.length;
+        int m = mat[0].length;
+        int count = 0;
+
+        for(int i =0; i<n; i++){
+            for(int j = 0; j<m ; j++){
+                if(mat[i][j]==1){
+                    if(valid(i,j,n,m,mat)){
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+        
+    }
+
+    private boolean valid(int i , int j, int n ,int m, int[][] mat){
+        for(int t = 0; t<n; t++){
+            if(t != i && mat[t][j]==1){
+                return false;
+            }
+
+        }
+        for(int t = 0; t<m; t++){
+            if(t != j && mat[i][t]==1){
+                return false;
+            }
+            
+        }
+        return true;
+    }
+}

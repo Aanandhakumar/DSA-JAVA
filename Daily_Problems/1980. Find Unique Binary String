@@ -1,0 +1,70 @@
+//1980. Find Unique Binary String in java...
+
+
+//Approach 1..
+class Solution {
+    public String findDifferentBinaryString(String[] nums) {
+        int n = nums.length;
+         Set<String> strings = new HashSet<>(Arrays.asList(nums));
+         BuildNumber(strings,"",n);
+         return res;
+
+        
+    }
+
+    private String res;
+    private void BuildNumber(Set<String> strings,String curr, int n){
+        if(curr.length() == n){
+            if(!strings.contains(curr)){
+                res = curr;
+                return ;
+            }
+            return;
+            
+        }
+
+
+       BuildNumber(strings,curr+"0",n);
+                    
+       BuildNumber(strings,curr+"1",n);
+        
+
+        return;
+    }
+}
+
+
+
+//Approach 2.. faster than Approach 1
+class Solution {
+    public String findDifferentBinaryString(String[] nums) {
+        int n = nums.length;
+         Set<String> strings = new HashSet<>(Arrays.asList(nums));
+         BuildNumber(strings,"",n);
+         return res;
+
+        
+    }
+
+    private String res;
+    private boolean BuildNumber(Set<String> strings,String curr, int n){
+        if(curr.length() == n){
+            if(!strings.contains(curr)){
+                res = curr;
+                return true;
+            }
+            return false;
+            
+        }
+
+
+        if(BuildNumber(strings,curr+"0",n)){
+            return true;
+        }
+         if(BuildNumber(strings,curr+"1",n)){
+            return true;
+        }
+
+        return false;
+    }
+}

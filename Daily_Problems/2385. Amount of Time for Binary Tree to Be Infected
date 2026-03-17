@@ -1,0 +1,85 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+
+ //2385. Amount of Time for Binary Tree to Be Infected in java...
+class Solution {
+    public int amountOfTime(TreeNode root, int start) {
+        if(root== null) return 0;
+
+        Map<TreeNode, TreeNode> parent = new HashMap<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        parent.put(root,null);
+        TreeNode target = null;
+
+
+        // Buide parent map and target...
+        while(!q.isEmpty()){
+            TreeNode curr = q.poll();
+            if(curr.val==start){
+                target = curr;
+            }
+            if(curr.left != null){
+                parent.put(curr.left,curr);
+                q.offer(curr.left);
+            }
+
+            if(curr.right != null){
+                parent.put(curr.right,curr);
+                q.offer(curr.right);
+            }
+        }
+        
+
+        //BFS from start...
+        int times = 0;
+        Map<TreeNode,Boolean> visited = new HashMap<>();
+        q.offer(target);
+        visited.put(target,true);
+        while(!q.isEmpty()){
+            int size = q.size();
+            for(int i = 0; i<size; i++){
+                TreeNode curr = q.poll();
+
+                if(curr.left != null && !visited.containsKey(curr.left)){
+                    visited.put(curr.left,true);
+                    q.offer(curr.left);
+                }
+                if(curr.right != null && !visited.containsKey(curr.right)){
+                    visited.put(curr.right,true);
+                    q.offer(curr.right);
+                }
+
+                TreeNode par = parent.get(curr);
+                if(par != null && !visited.containsKey(par)){
+                    visited.put(par,true);
+                    q.offer(par);
+                }
+
+
+            }
+            if(!q.isEmpty()) times++;
+            
+
+        }
+        return times;
+
+
+
+        
+    }
+}

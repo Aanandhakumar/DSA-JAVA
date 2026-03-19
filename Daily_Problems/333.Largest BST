@@ -1,0 +1,67 @@
+// class Node
+// {
+//     int data;
+//     Node left, right;
+
+//     public Node(int d)
+//     {
+//         data = d;
+//         left = right = null;
+//     }
+// }
+
+//Largest BST in java.....
+class Minmax{
+    int min;
+    int max;
+    boolean isBST;
+    int size;
+    
+    Minmax(){
+        min = Integer.MAX_VALUE;
+        max = Integer.MIN_VALUE;
+        isBST = true;
+        size = 0;
+    }
+}
+class Solution {
+
+    // Return the size of the largest sub-tree which is also a BST
+    static int largestBst(Node root) {
+        // Write your code here
+        Minmax m = Largest(root);
+        return m.size;
+        
+    }
+    
+    private static Minmax Largest(Node root){
+        if(root == null){
+            return new Minmax();
+        }
+        
+       Minmax leftMinMax = Largest(root.left);
+       Minmax rightMinMax = Largest(root.right);
+       
+       Minmax m = new Minmax();
+       
+       if(leftMinMax.isBST == false ||  rightMinMax.isBST == false || (leftMinMax.max >= root.data || rightMinMax.min <= root.data)){
+           m.isBST = false;
+           m.size = Math.max(leftMinMax.size, rightMinMax.size);
+           return m;
+       }              
+        
+        
+        
+      m.isBST = true;
+      m.size = leftMinMax.size + rightMinMax.size +1;
+      
+      m.min = root.left != null ? leftMinMax.min : root.data;
+      m.max = root.right != null ? rightMinMax.max: root.data;
+      
+      return m;
+        
+        
+        
+        
+    }
+}

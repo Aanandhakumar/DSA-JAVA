@@ -1,0 +1,35 @@
+//2360. Longest Cycle in a Graph in java...
+
+
+
+class Solution {
+    public int longestCycle(int[] edges) {
+        int n = edges.length;
+        boolean[] visited = new boolean[n];
+        int maxLen = -1;
+
+        for(int start = 0; start < n; start++){
+
+            if(visited[start]) continue;
+
+            List<Integer> path = new ArrayList<>();
+            int curr = start;
+
+            while(curr != -1 && !visited[curr]){
+                 visited[curr] = true;
+                 path.add(curr);
+                 curr = edges[curr];
+            }
+
+            if(curr == -1) continue;
+
+            int idx = path.indexOf(curr);
+            if(idx != -1){
+                int currlen = path.size() - idx;
+                maxLen = Math.max(currlen,maxLen);
+            }
+        }
+        
+        return maxLen;
+    }
+}
